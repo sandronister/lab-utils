@@ -26,12 +26,12 @@ func printMap(key interface{}, list reflect.Value) (string, error) {
 }
 
 func SearchKey[T interface{}](key interface{}, data T) (string, error) {
+	list := reflect.ValueOf(data)
+
 	switch reflect.TypeOf(data).Kind() {
 	case reflect.Slice:
-		list := reflect.ValueOf(data)
 		return printSlice(key, list)
 	case reflect.Map:
-		list := reflect.ValueOf(data)
 		return printMap(key, list)
 	default:
 		return "", errors.New("nenhuma chave encontrada")
